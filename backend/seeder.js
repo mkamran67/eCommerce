@@ -18,19 +18,21 @@ const importData = async () => {
     await Product.deleteMany();
     await User.deleteMany();
 
-    // Import data
-
+    // Insert Users into DB and get the array of Users
     const createdUsers = await User.insertMany(users);
 
+    // Grab the first user from the user list, which is the Admin
     const adminUser = createdUsers[0]._id;
 
-    const sampleProducts = products.map((p) => {
+    // Associate the Admin User to each product
+    const sampleProducts = products.map((product) => {
       return {
-        ...p,
+        ...product,
         user: adminUser,
       };
     });
 
+    // Insert Products into DB
     await Product.insertMany(sampleProducts);
 
     console.log(`Data imported!`);
