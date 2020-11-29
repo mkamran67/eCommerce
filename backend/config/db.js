@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import products from '../data/products.js';
 
 const connectDB = async () => {
   try {

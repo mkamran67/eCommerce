@@ -6,9 +6,12 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';
+
 import productRoutes from './routes/productRoutes.js';
 
-dotenv.config();
+import { notFound, errorHandler } from './middleware/errorMiddleware.js';
+
+dotenv.config({ path: '../.env' });
 
 connectDB();
 
@@ -22,22 +25,10 @@ app.get('/', (req, res) => {
 app.use('/api/products', productRoutes);
 
 //
-app.use((req, res, next) => {
-  const error = new Error(`Note Found - ${req.originalUrl}`);
-  res.status(404);
-  next(error);
-});
+app.use(notFound);
 
 // Error handler
-app.use((err, req, res, next) => {
-  const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
-
-  res.status(statusCode);
-  res.json({
-    message: err.message,
-    stack: process.env.NODE_ENV === 'production' ? null : err.stack,
-  });
-});
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 

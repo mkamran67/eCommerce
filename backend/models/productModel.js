@@ -52,7 +52,7 @@ const productScehma = mongoose.Schema(
       required: true,
       default: 0,
     },
-    countInStick: {
+    countInStock: {
       type: Number,
       required: true,
       default: 0,
