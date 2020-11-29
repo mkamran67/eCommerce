@@ -1,0 +1,28 @@
+import asyncHandler from 'express-async-handler';
+import Product from '../models/productModel.js';
+
+// @desc    Get all Products
+// @route   GET /api/products
+// @access  Public
+const getProducts = asyncHandler(async (res, req) => {
+  const products = await Product.find({});
+
+  res.json(products);
+});
+
+// @desc    Get Product by ID
+// @route   GET /api/products/:id
+// @access  Public
+const getProductById = asyncHandler(async (req, res) => {
+  console.log(`Finding product for id:${req.params.id}`);
+  const product = await Product.findById(req.params.id);
+
+  if (product) {
+    res.json(product);
+  } else {
+    res.status(404);
+    throw new Error('Product Not Found');
+  }
+});
+
+export { getProducts, getProductById };
