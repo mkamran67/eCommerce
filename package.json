@@ -1,7 +1,7 @@
 {
   "name": "ecommerce",
   "version": "1.0.0",
-  "description": "",
+  "description": "An online shop.",
   "main": "index.js",
   "type": "module",
   "scripts": {
