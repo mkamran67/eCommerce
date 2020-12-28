@@ -17,25 +17,33 @@ import {
   userRegisterReducer,
   userDetailsReducer,
   userUpdateProfileReducer,
+  userListReducer,
+  userDeleteReducer,
 } from './reducers/userReducers';
 
 // ---------------------------------------------------------------- Order Reducers
 import {
   orderCreateReducer,
   orderDetailsReducer,
+  orderPayReducer,
+  orderListMyReducer,
 } from './reducers/orderReducers.js';
 
 // ---------------------------------------------------------------- Combining reducers
 const reducer = combineReducers({
+  cart: cartReducer,
   productList: productReducer,
   productDetails: productDetailsReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
-  cart: cartReducer,
   userDetails: userDetailsReducer,
   userUpdateProfile: userUpdateProfileReducer,
+  userList: userListReducer,
+  userDelete: userDeleteReducer,
   orderCreate: orderCreateReducer,
   orderDetails: orderDetailsReducer,
+  orderPay: orderPayReducer,
+  orderListMy: orderListMyReducer,
 });
 
 // Get Cart Items from localstorage for initial state.
