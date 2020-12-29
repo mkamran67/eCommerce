@@ -18,6 +18,7 @@ import {
   userDetailsReducer,
   userUpdateProfileReducer,
   userListReducer,
+  userUpdateReducer,
   userDeleteReducer,
 } from './reducers/userReducers';
 
@@ -44,6 +45,7 @@ const reducer = combineReducers({
   orderDetails: orderDetailsReducer,
   orderPay: orderPayReducer,
   orderListMy: orderListMyReducer,
+  userUpdate: userUpdateReducer,
 });
 
 // Get Cart Items from localstorage for initial state.
