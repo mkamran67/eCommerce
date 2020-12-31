@@ -10,14 +10,10 @@ import { protect, isAdmin } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-// @desc    Get all Products
-// @route   GET /api/products
-// @access  Public
+// Route -> /api/products
 router.route('/').get(getProducts).post(protect, isAdmin, createProduct);
 
-// @desc    Get Product by ID
-// @route   GET /api/products/:id
-// @access  Public
+// @desc    Get Product by ID Routes
 router
   .route('/:id')
   .get(getProductById)
