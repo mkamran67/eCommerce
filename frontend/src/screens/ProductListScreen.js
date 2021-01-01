@@ -33,12 +33,11 @@ const ProductListScreen = ({ history, match }) => {
   );
 
   useEffect(() => {
-    // dispatch({ type: PRODUCT_CREATE_RESET });
+    dispatch({ type: PRODUCT_CREATE_RESET });
     if (!userInfo || !userInfo.isAdmin) {
       history.push('/login');
     }
     if (successCreate && createdProduct) {
-      console.log(createdProduct);
       history.push(`/admin/product/${createdProduct._id}/edit`);
     } else {
       dispatch(listProducts());
@@ -60,7 +59,6 @@ const ProductListScreen = ({ history, match }) => {
   };
 
   const createProductHandler = () => {
-    console.log(`this be the one`);
     dispatch(createProduct());
   };
 
