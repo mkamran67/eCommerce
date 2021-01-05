@@ -9,6 +9,7 @@ import {
   productDeleteReducer,
   productCreateReducer,
   productUpdateReducer,
+  productReviewCreateReducer,
 } from './reducers/productReducer';
 
 // ---------------------------------------------------------------- Cart Reducers
@@ -31,6 +32,8 @@ import {
   orderDetailsReducer,
   orderPayReducer,
   orderListMyReducer,
+  ordersGetOrdersReducer,
+  orderDeliverReducer,
 } from './reducers/orderReducers.js';
 
 // ---------------------------------------------------------------- Combining reducers
@@ -41,17 +44,20 @@ const reducer = combineReducers({
   productDelete: productDeleteReducer,
   productCreate: productCreateReducer,
   productUpdate: productUpdateReducer,
+  productReviewCreate: productReviewCreateReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
   userUpdateProfile: userUpdateProfileReducer,
   userList: userListReducer,
+  userUpdate: userUpdateReducer,
   userDelete: userDeleteReducer,
   orderCreate: orderCreateReducer,
   orderDetails: orderDetailsReducer,
+  ordersGetOrders: ordersGetOrdersReducer,
   orderPay: orderPayReducer,
   orderListMy: orderListMyReducer,
-  userUpdate: userUpdateReducer,
+  orderDeliver: orderDeliverReducer,
 });
 
 // Get Cart Items from localstorage for initial state.
