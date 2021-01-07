@@ -5,9 +5,25 @@ import Product from '../models/productModel.js';
 // @route   GET /api/products
 // @access  Public
 const getProducts = asyncHandler(async (req, res) => {
-  const products = await Product.find({});
+  const pageSize = 10;
+  const page = Number(req.query.pageNumber) || 1;
+  const keyword = req.query.keyword
+    ? {
+        name: {
+          $regex: req.query.keyword,
+          $options: 'i',
+        },
+      }
+    : {};
 
-  res.json(products);
+  // Gets total amount of products
+  const count = await Product.countDocuments({ ...keyword });
+  // Gets all the products -> limits pageSize amount of products and skips how many it has shown already
+  const products = await Product.find({ ...keyword })
+    .limit(pageSize)
+    .skip(pageSize * (page - 1));
+
+  res.json({ products, page, pages: Math.ceil(count / pageSize) });
 });
 
 // @desc    Get Product by ID
@@ -92,6 +108,15 @@ const updateProduct = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Get Top rated products
+// @route   GET /api/products/top
+// @access  Public
+const getTopProducts = asyncHandler(async (req, res) => {
+  const products = await Product.find({}).sort({ rating: -1 }).limit(3);
+
+  res.json(products);
+});
+
 // @desc    Create new review
 // @route   POST /api/products/:id/review
 // @access  Private
@@ -139,4 +164,5 @@ export {
   getProductById,
   deleteProduct,
   createProductReview,
+  getTopProducts,
 };
